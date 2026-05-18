@@ -3,7 +3,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 
 // Reads saved theme from localStorage on first load
-// Falls back to 'dark' if nothing is saved yet
+// Falls back to 'light' if nothing is saved yet
 // Must be a regular function — not a hook — because it runs before React renders
 function getInitialTheme() {
   // localStorage is only available in the browser
@@ -12,7 +12,8 @@ function getInitialTheme() {
     const saved = localStorage.getItem("theme");
     if (saved) return saved;
   }
-  return "dark";
+  // Default to light mode — user can switch to dark via the toggle
+  return "light";
 }
 
 export const ThemeContext = createContext();

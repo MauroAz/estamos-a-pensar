@@ -1,83 +1,191 @@
 "use client";
-// Font Awesome icons
-import {
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaNodeJs,
-  FaPython,
-  FaGitAlt,
-} from "react-icons/fa";
 
-// Simple Icons (brand icons)
-import { SiFlutter, SiMongodb, SiTailwindcss } from "react-icons/si";
+import { useTheme } from "../../context/ThemeProvider";
 
-import SkillCard from "./SkillCard";
+const manualSkills = [
+  {
+    emoji: "📖",
+    name: "Narração Oral",
+    desc: "Contar histórias ao vivo com voz, corpo e presença",
+  },
+  {
+    emoji: "✂️",
+    name: "Construção de Livros",
+    desc: "Encadernação artesanal e criação de livros únicos",
+  },
+  {
+    emoji: "🎭",
+    name: "Teatro e Marionetas",
+    desc: "Formas animadas e teatro de objetos",
+  },
+  {
+    emoji: "🎲",
+    name: "Jogos de Mesa",
+    desc: "Design e facilitação de jogos narrativos",
+  },
+  {
+    emoji: "🖊️",
+    name: "Blackout Poetry",
+    desc: "Poesia criada a partir do apagamento de texto",
+  },
+  {
+    emoji: "🎵",
+    name: "Música e Voz",
+    desc: "Songwriting, spoken word e performance sonora",
+  },
+];
 
-import { experiences } from "../../data/experiences";
-import ExperienceItem from "./ExperienceItem";
+const digitalSkills = [
+  {
+    emoji: "💻",
+    name: "Digital Storytelling",
+    desc: "Narrativas multimédia com ferramentas digitais",
+  },
+  {
+    emoji: "🤖",
+    name: "Bot Poets & IA",
+    desc: "Escrita criativa com inteligência artificial",
+  },
+  {
+    emoji: "🎧",
+    name: "Field Recording",
+    desc: "Som como matéria narrativa e criativa",
+  },
+  {
+    emoji: "✍️",
+    name: "Erasure Poetry Digital",
+    desc: "Blackout poetry em ambiente digital",
+  },
+  {
+    emoji: "🎨",
+    name: "Tipografia Animada",
+    desc: "Palavras que ganham vida através da animação",
+  },
+  {
+    emoji: "🖼️",
+    name: "ReCreating the Past",
+    desc: "Arte e código para reinterpretar a história",
+  },
+];
 
 export default function SkillsExperience() {
-  // Add or remove skills here — icon is JSX, name is display text
-  // Colors applied directly to icon components via className
-  const skills = [
-    { name: "React", icon: <FaReact className="text-blue-400" /> },
-    { name: "HTML5", icon: <FaHtml5 className="text-orange-500" /> },
-    { name: "CSS3", icon: <FaCss3Alt className="text-blue-500" /> },
-    { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
-    { name: "Python", icon: <FaPython className="text-yellow-400" /> },
-    { name: "Git", icon: <FaGitAlt className="text-orange-600" /> },
-    { name: "Flutter", icon: <SiFlutter className="text-blue-300" /> },
-    { name: "MongoDB", icon: <SiMongodb className="text-green-400" /> },
-    { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-400" /> },
-  ];
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
-    <section className="min-h-screen scroll-mt-24 px-4 text-center bg-white dark:bg-gray-900 py-20">
-      {/* Section main title */}
-      <h2 className="text-lg text-gray-600 dark:text-gray-400">
-        Skills and Experience
-      </h2>
+    <section
+      id="skills"
+      className="scroll-mt-24 py-20 px-6"
+      style={{ backgroundColor: isLight ? "#EDD9B0" : "#150f05" }}
+    >
+      {/* Section heading */}
+      <div className="text-center mb-14">
+        <h2
+          className="text-lg italic mb-1"
+          style={{
+            color: isLight ? "#6B4423" : "#C4A882",
+            fontFamily: "Georgia, serif",
+          }}
+        >
+          Como trabalhamos
+        </h2>
+        <h3
+          className="text-3xl font-bold"
+          style={{
+            color: isLight ? "#3B1F0A" : "#D4B896",
+            fontFamily: "Georgia, serif",
+          }}
+        >
+          Manual & Digital
+        </h3>
+      </div>
 
-      {/* Section subtitle — large, bold, blue */}
-      <h3 className="text-4xl font-bold text-blue-500 mb-16">
-        What I Do & Where I've Been
-      </h3>
-
-      {/* Two-column grid — stacks on mobile, side by side on medium+ screens */}
-      {/* gap-12 gives breathing room between the two columns */}
+      {/* Two columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        {/* ── LEFT COLUMN — Skills ── */}
+        {/* LEFT — Manual */}
         <div>
-          {/* Placeholder heading — SkillCard components go here later */}
-          <h4 className="text-xl font-semibold mb-6">Skills</h4>
-          {/* 3-column grid of skill cards */}
-          {/* gap-6 gives spacing between each card */}
-          <div className="grid grid-cols-3 gap-6">
-            {skills.map((skill) => (
-              // key uses name — safe since skill names are unique
-              <SkillCard key={skill.name} icon={skill.icon} name={skill.name} />
+          <h4
+            className="text-xl font-bold mb-6 text-center pb-2 border-b-2"
+            style={{
+              color: isLight ? "#3B1F0A" : "#D4B896",
+              borderColor: "#8B3A2A",
+              fontFamily: "Georgia, serif",
+            }}
+          >
+            🖐 Técnicas Manuais
+          </h4>
+          <div className="space-y-4">
+            {manualSkills.map((skill) => (
+              <div
+                key={skill.name}
+                className="flex items-start gap-4 p-4 rounded-xl transition hover:scale-105"
+                style={{
+                  backgroundColor: isLight ? "#C4A882" : "#2a1f0e",
+                }}
+              >
+                <span className="text-2xl">{skill.emoji}</span>
+                <div className="text-left">
+                  <p
+                    className="font-semibold"
+                    style={{
+                      color: isLight ? "#3B1F0A" : "#D4B896",
+                      fontFamily: "Georgia, serif",
+                    }}
+                  >
+                    {skill.name}
+                  </p>
+                  <p
+                    className="text-sm"
+                    style={{ color: isLight ? "#5C3D1E" : "#A08060" }}
+                  >
+                    {skill.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* ── RIGHT COLUMN — Experience ── */}
+        {/* RIGHT — Digital */}
         <div>
-          {/* Placeholder heading — ExperienceItem components go here later */}
-          <h4 className="text-xl font-semibold mb-6">Experience</h4>
-          {/* border-l-2 creates the vertical blue line — the timeline backbone */}
-          {/* pl-6 pushes content away from the line */}
-          {/* space-y-8 adds consistent spacing between each entry */}
-          <div className="border-l-2 border-blue-500 pl-6 space-y-8">
-            {experiences.map((exp) => (
-              // key uses title+company combined — safer than title alone
-              // in case someone held same title at different companies
-              <ExperienceItem
-                key={exp.title + exp.company}
-                title={exp.title}
-                company={exp.company}
-                years={exp.years}
-              />
+          <h4
+            className="text-xl font-bold mb-6 text-center pb-2 border-b-2"
+            style={{
+              color: isLight ? "#3B1F0A" : "#D4B896",
+              borderColor: "#5C6B3A",
+              fontFamily: "Georgia, serif",
+            }}
+          >
+            💻 Técnicas Digitais
+          </h4>
+          <div className="space-y-4">
+            {digitalSkills.map((skill) => (
+              <div
+                key={skill.name}
+                className="flex items-start gap-4 p-4 rounded-xl transition hover:scale-105"
+                style={{
+                  backgroundColor: isLight ? "#C4A882" : "#2a1f0e",
+                }}
+              >
+                <span className="text-2xl">{skill.emoji}</span>
+                <div className="text-left">
+                  <p
+                    className="font-semibold"
+                    style={{
+                      color: isLight ? "#3B1F0A" : "#D4B896",
+                      fontFamily: "Georgia, serif",
+                    }}
+                  >
+                    {skill.name}
+                  </p>
+                  <p
+                    className="text-sm"
+                    style={{ color: isLight ? "#5C3D1E" : "#A08060" }}
+                  >
+                    {skill.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
